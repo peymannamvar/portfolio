@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="پورتفولیو پیمان نامور؛ طراح وبسایت و UI/UX" />
+    <title>Peyman Namvar — طراح وب و UI/UX</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              void: '#08090b',
+              ink: '#101114',
+              panel: '#17181c',
+              line: '#2a2b31',
+              sand: '#e8e2d6',
+              mist: '#a39e94',
+              gold: '#c9a36a',
+              'gold-soft': '#e4c48a',
+              sage: '#7f9a86',
+            },
+            fontFamily: {
+              sans: ['Vazirmatn', 'ui-sans-serif', 'system-ui'],
+            },
+          },
+        },
+      }
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="bg-void text-sand font-sans">
+    <div class="grain"></div>
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-ring hidden md:block"></div>
+
+    <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+        <a href="#top" class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-full border border-gold/40 text-xs tracking-[0.2em] text-gold">PN</span>
+          <span class="text-sm font-medium">Peyman Namvar</span>
+        </a>
+        <nav class="hidden items-center gap-8 text-sm text-mist md:flex">
+          <a href="#skills" class="hover:text-gold-soft">مهارت‌ها</a>
+          <a href="#tools" class="hover:text-gold-soft">ابزارها</a>
+          <a href="#articles" class="hover:text-gold-soft">مقالات</a>
+          <a href="#game" class="hover:text-gold-soft">بازی</a>
+          <a href="#order" class="hover:text-gold-soft">سفارش</a>
+        </nav>
+        <a href="#order" class="hidden rounded-full border border-gold/40 px-4 py-2 text-sm text-gold transition hover:bg-gold hover:text-void md:inline-flex">ثبت سفارش</a>
+        <button id="menu-toggle" type="button" class="grid h-10 w-10 place-items-center rounded-full border border-line md:hidden" aria-label="منو" aria-expanded="false">
+          <span class="flex w-4 flex-col gap-1.5">
+            <i class="menu-line-1 block h-px bg-sand transition"></i>
+            <i class="menu-line-2 block h-px bg-sand transition"></i>
+            <i class="menu-line-3 block h-px bg-sand transition"></i>
+          </span>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden border-t border-line bg-ink/95 px-5 py-6 md:hidden">
+        <div class="flex flex-col gap-4">
+          <a href="#skills">مهارت‌ها</a>
+          <a href="#tools">ابزارها</a>
+          <a href="#articles">مقالات</a>
+          <a href="#game">بازی</a>
+          <a href="#order">سفارش</a>
+        </div>
+      </div>
+
+      <style>
+        
+/* ===== Luxury Persian Name Effect ===== */
+
+.hero-title {
+  direction: rtl;
+  text-align: right;
+  margin: 0;
+  line-height: 1.6;
+  overflow: visible;
+}
+
+.hero-name {
+  position: relative;
+  display: inline-block;
+  direction: rtl;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+  font-weight: 800;
+  letter-spacing: 0 !important;
+  line-height: 1.5;
+
+  color: #e8e2d6;
+  background: linear-gradient(
+    110deg,
+    #e8e2d6 0%,
+    #e8e2d6 25%,
+    #c9a36a 42%,
+    #fff0c5 50%,
+    #c9a36a 58%,
+    #e8e2d6 78%,
+    #e8e2d6 100%
+  );
+
+  background-size: 250% 100%;
+  background-position: 100% 50%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  filter: drop-shadow(0 0 18px rgb(201 163 106 / 10%));
+
+  animation:
+    nameReveal 1s cubic-bezier(.2, .8, .2, 1) both,
+    goldShimmer 5s ease-in-out 1s infinite;
+}
+
+/* خط طلایی زیر اسم */
+.hero-name::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0.05em;
+
+  width: 100%;
+  height: 3px;
+  border-radius: 50px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #c9a36a 20%,
+    #fff0c5 50%,
+    #c9a36a 80%,
+    transparent
+  );
+
+  transform: scaleX(0);
+  transform-origin: right;
+  box-shadow: 0 0 14px rgb(201 163 106 / 45%);
+
+  animation: underlineReveal 1s ease-out 0.4s forwards;
+}
+
+/* ظاهر شدن کل عبارت، نه تک‌تک حروف */
+@keyframes nameReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: drop-shadow(0 0 18px rgb(201 163 106 / 10%));
+  }
+}
+
+/* حرکت آرام انعکاس طلایی */
+@keyframes goldShimmer {
+  0%, 100% {
+    background-position: 100% 50%;
+  }
+
+  50% {
+    background-position: 0% 50%;
+  }
+}
+
+/* رسم شدن خط زیر اسم */
+@keyframes underlineReveal {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* رعایت تنظیمات کاهش حرکت سیستم */
+@media (prefers-reduced-motion: reduce) {
+  .hero-name,
+  .hero-name::after {
+    animation: none !important;
+  }
+
+  .hero-name {
+    opacity: 1;
+    transform: none;
+    background-position: 50% 50%;
+  }
+
+  .hero-name::after {
+    transform: scaleX(1);
+  }
+}
+
+      </style>
+    </header>
+
+    <main>
+      <section id="top" class="relative isolate overflow-hidden pt-28 md:pt-36">
+        <div class="pointer-events-none absolute inset-0 grid-fade"></div>
+        <div class="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-gold/10 blur-3xl"></div>
+        <div class="pointer-events-none absolute -right-16 bottom-10 h-80 w-80 rounded-full bg-sage/10 blur-3xl"></div>
+        <div class="relative mx-auto grid max-w-6xl gap-12 px-5 pb-20 md:grid-cols-[1.15fr_0.85fr] md:items-center md:pb-28">
+          <div>
+            <p class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-panel/70 px-3 py-1 text-xs text-mist">
+              <span class="h-1.5 w-1.5 rounded-full bg-sage"></span>
+              طراح وبسایت و UI/UX
+            </p>
+
+            <h1 class="hero-title">
+              <span class="hero-name">پیمان نامور</span>
+            </h1>
+            
+            <p class="reveal mt-6 max-w-lg text-base leading-8 text-mist md:text-lg" style="animation-delay:0.4s">
+              خوش آمدید. من تجربهٔ دیجیتال می‌سازم: از هویت بصری تا کدنویسی رابط، از وردپرس تا جاوااسکریپت، با تمرکز روی زیبایی مینیمال، سرعت و سئو.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#order" class="rounded-full bg-gold px-6 py-3 text-sm font-medium text-void transition hover:bg-gold-soft">سفارش طراحی سایت</a>
+              <a href="#articles" class="rounded-full border border-line px-6 py-3 text-sm transition hover:border-gold/50">خواندن مقالات</a>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="floaty relative overflow-hidden rounded-[2rem] border border-line bg-panel p-6 shadow-[0_0_80px_rgba(201,163,106,0.08)]">
+              <div class="mb-6 flex items-center justify-between text-xs text-mist">
+                <span>Studio Snapshot</span>
+                <span>۲۰۲۶</span>
+              </div>
+              <div class="aspect-[4/5] overflow-hidden rounded-[1.4rem]">
+                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80" alt="فضای طراحی محصول" class="h-full w-full object-cover" />
+              </div>
+              <div class="mt-5 grid grid-cols-3 gap-3 text-center text-xs">
+                <div class="rounded-2xl border border-line py-3">وردپرس</div>
+                <div class="rounded-2xl border border-line py-3">جاوااسکریپت</div>
+                <div class="rounded-2xl border border-line py-3">فیگما</div>
+              </div>
+            </div>
+            <div class="absolute -bottom-5 -left-3 rounded-2xl border border-gold/30 bg-void/90 px-4 py-3 text-xs text-gold backdrop-blur md:-left-8">طراحی استاندارد · موبایل‌اول</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+        <div class="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-xs tracking-[0.3em] text-gold">SKILLS</p>
+            <h2 class="mt-2 text-3xl font-bold md:text-4xl">مهارت‌هایی که با آن‌ها کار می‌کنم</h2>
+          </div>
+          <p class="max-w-sm text-sm leading-7 text-mist">هر پروژه ترکیبی از طراحی، کد و بهینه‌سازی است. این چهار ستون، هستهٔ استودیوی من هستند.</p>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          <article data-cursor class="group relative overflow-hidden rounded-[1.6rem] border border-line bg-panel p-6 transition duration-500 hover:-translate-y-1 hover:border-gold/40">
+            <div class="mb-8 flex items-center justify-between">
+              <span class="text-xs text-mist">۰۱</span>
+              <span class="rounded-full border border-line px-3 py-1 text-xs text-gold">WordPress</span>
+            </div>
+            <h3 class="text-2xl font-semibold">طراحی سایت با وردپرس</h3>
+            <p class="mt-3 text-sm leading-7 text-mist">سایت‌های سریع، قابل مدیریت و بهینه برای کسب‌وکارهایی که باید خودشان محتوا را به‌روز کنند.</p>
+          </article>
+          <article data-cursor class="group relative overflow-hidden rounded-[1.6rem] border border-line bg-panel p-6 transition duration-500 hover:-translate-y-1 hover:border-gold/40">
+            <div class="mb-8 flex items-center justify-between">
+              <span class="text-xs text-mist">۰۲</span>
+              <span class="rounded-full border border-line px-3 py-1 text-xs text-gold">JavaScript</span>
+            </div>
+            <h3 class="text-2xl font-semibold">کدنویسی جاوااسکریپت</h3>
+            <p class="mt-3 text-sm leading-7 text-mist">تعامل، انیمیشن و منطق رابط کاربری با جاوااسکریپت مدرن برای تجربه‌ای روان.</p>
+          </article>
+          <article data-cursor class="group relative overflow-hidden rounded-[1.6rem] border border-line bg-panel p-6 transition duration-500 hover:-translate-y-1 hover:border-gold/40">
+            <div class="mb-8 flex items-center justify-between">
+              <span class="text-xs text-mist">۰۳</span>
+              <span class="rounded-full border border-line px-3 py-1 text-xs text-gold">UI / UX</span>
+            </div>
+            <h3 class="text-2xl font-semibold">طراحی رابط کاربری</h3>
+            <p class="mt-3 text-sm leading-7 text-mist">از وایرفریم تا سیستم طراحی؛ رابط‌هایی که هم زیبا هستند و هم مسیر کاربر را ساده می‌کنند.</p>
+          </article>
+          <article data-cursor class="group relative overflow-hidden rounded-[1.6rem] border border-line bg-panel p-6 transition duration-500 hover:-translate-y-1 hover:border-gold/40">
+            <div class="mb-8 flex items-center justify-between">
+              <span class="text-xs text-mist">۰۴</span>
+              <span class="rounded-full border border-line px-3 py-1 text-xs text-gold">SEO</span>
+            </div>
+            <h3 class="text-2xl font-semibold">سئو</h3>
+            <p class="mt-3 text-sm leading-7 text-mist">ساختار، سرعت، محتوا و تکنیکال سئو تا سایت در نتایج جستجو دیده شود.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tools" class="py-10">
+        <div class="mx-auto max-w-6xl px-5">
+          <p class="text-xs tracking-[0.3em] text-gold">TOOLKIT</p>
+          <h2 class="mt-2 text-3xl font-bold md:text-4xl">نرم‌افزارها و ابزارها</h2>
+        </div>
+        <div class="mt-8 overflow-hidden border-y border-line bg-ink py-6">
+          <div class="marquee-track">
+            <div class="flex items-center gap-8 px-4 text-2xl font-semibold md:text-3xl">
+              <span>Figma</span><span class="text-xs font-normal text-mist">طراحی محصول</span>
+              <span class="h-1 w-1 rounded-full bg-gold"></span>
+              <span>Photoshop</span><span class="text-xs font-normal text-mist">ویرایش تصویر</span>
+              <span class="h-1 w-1 rounded-full bg-gold"></span>
+              <span>Illustrator</span><span class="text-xs font-normal text-mist">هویت بصری</span>
+              <span class="h-1 w-1 rounded-full bg-gold"></span>
+              <span>VS Code</span><span class="text-xs font-normal text-mist">توسعه</span>
+              <span class="h-1 w-1 rounded-full bg-gold"></span>
+              <span>AI Tools</span><span class="text-xs font-normal text-mist">شتاب طراحی</span>
+              <span class="h-1 w-1 rounded-full bg-gold"></span>
+              <span>Figma</span><span class="text-xs font-normal text-mist">طراحی محصول</span>
+              <span class="h-1 w-1 rounded-full bg-gold"></span>
+              <span>Photoshop</span><span class="text-xs font-normal text-mist">ویرایش تصویر</span>
+              <span class="h-1 w-1 rounded-full bg-gold"></span>
+              <span>Illustrator</span><span class="text-xs font-normal text-mist">هویت بصری</span>
+              <span class="h-1 w-1 rounded-full bg-gold"></span>
+              <span>VS Code</span><span class="text-xs font-normal text-mist">توسعه</span>
+              <span class="h-1 w-1 rounded-full bg-gold"></span>
+              <span>AI Tools</span><span class="text-xs font-normal text-mist">شتاب طراحی</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mx-auto mt-8 grid max-w-6xl grid-cols-2 gap-3 px-5 sm:grid-cols-3 md:grid-cols-5">
+
+          <!-- Figma -->
+          <div class="rounded-[1.4rem] border border-line bg-panel p-5 transition hover:border-gold/40">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-gold/30 text-gold">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 3H9a3 3 0 0 0 0 6h3V3Z"/>
+                <path d="M12 3h3a3 3 0 0 1 0 6h-3V3Z"/>
+                <circle cx="15" cy="12" r="3"/>
+                <path d="M6 12a3 3 0 0 1 3-3h3v6H9a3 3 0 0 1-3-3Z"/>
+                <path d="M6 18a3 3 0 0 1 3-3h3v3a3 3 0 0 1-6 0Z"/>
+              </svg>
+            </div>
+            <h3 class="font-medium">Figma</h3>
+            <p class="mt-1 text-xs text-mist">طراحی محصول</p>
+          </div>
+        
+          <!-- Photoshop -->
+          <div class="rounded-[1.4rem] border border-line bg-panel p-5 transition hover:border-gold/40">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-gold/30 text-gold">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="4"/>
+                <path d="M7 17V7h4a3 3 0 0 1 0 6H7"/>
+                <path d="M17 12c-2-1-3-1-3-2s1-2 2-2 2 1 2 1"/>
+                <path d="M14 15c1 1 3 1 4 0"/>
+              </svg>
+            </div>
+            <h3 class="font-medium">Photoshop</h3>
+            <p class="mt-1 text-xs text-mist">ویرایش تصویر</p>
+          </div>
+        
+          <!-- Illustrator -->
+          <div class="rounded-[1.4rem] border border-line bg-panel p-5 transition hover:border-gold/40">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-gold/30 text-gold">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="4"/>
+                <path d="m7 17 4-10 4 10"/>
+                <path d="M8.5 13h5"/>
+                <path d="M17 11v6"/>
+                <path d="M17 7h.01"/>
+              </svg>
+            </div>
+            <h3 class="font-medium">Illustrator</h3>
+            <p class="mt-1 text-xs text-mist">هویت بصری</p>
+          </div>
+        
+          <!-- VS Code -->
+          <div class="rounded-[1.4rem] border border-line bg-panel p-5 transition hover:border-gold/40">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-gold/30 text-gold">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+                <path d="m16 3 5 2v14l-5 2-10-8 10-10Z"/>
+                <path d="m6 8-3 4 3 4"/>
+                <path d="m16 3-0 18"/>
+              </svg>
+            </div>
+            <h3 class="font-medium">VS Code</h3>
+            <p class="mt-1 text-xs text-mist">توسعه</p>
+          </div>
+        
+          <!-- AI Tools -->
+          <div class="rounded-[1.4rem] border border-line bg-panel p-5 transition hover:border-gold/40">
+            <div class="mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-gold/30 text-gold">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+                <path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/>
+                <path d="m19 2 .8 2.2L22 5l-2.2.8L19 8l-.8-2.2L16 5l2.2-.8L19 2Z"/>
+              </svg>
+            </div>
+            <h3 class="font-medium">AI Tools</h3>
+            <p class="mt-1 text-xs text-mist">شتاب طراحی</p>
+          </div>
+        
+        </div>
+        
+      </section>
+
+      <section id="articles" class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+        <div class="mb-10">
+          <p class="text-xs tracking-[0.3em] text-gold">JOURNAL</p>
+          <h2 class="mt-2 text-3xl font-bold md:text-4xl">مقالات؛ با پاپ‌آپ و تصاویر مرتبط</h2>
+        </div>
+        <div id="articles-grid" class="grid gap-4 md:grid-cols-2"></div>
+      </section>
+
+      <section id="game" class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+        <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-xs tracking-[0.3em] text-gold">PLAY</p>
+            <h2 class="mt-2 text-3xl font-bold md:text-4xl">بازی توکن‌گیر</h2>
+            <p class="mt-2 max-w-md text-sm leading-7 text-mist">پَدل را با انگشت یا موس حرکت بده و توکن‌های UI، JS، وردپرس، سئو و AI را بگیر. سه شانس داری.</p>
+          </div>
+          <div class="flex items-center gap-3 text-sm">
+            <span class="rounded-full border border-line px-3 py-1">امتیاز <span id="game-score">0</span></span>
+            <span class="rounded-full border border-line px-3 py-1">شانس <span id="game-lives">3</span></span>
+            <button id="game-start" type="button" class="rounded-full bg-gold px-4 py-2 text-void">شروع</button>
+          </div>
+        </div>
+        <div class="relative overflow-hidden rounded-[1.8rem] border border-line">
+          <canvas id="game-canvas" class="block w-full touch-none"></canvas>
+          <div id="game-overlay" class="pointer-events-none absolute inset-0 grid place-items-center bg-void/30 text-sm">برای شروع دکمه را بزن</div>
+        </div>
+      </section>
+
+      <section id="order" class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+        <div class="grid gap-10 overflow-hidden rounded-[2rem] border border-line bg-panel md:grid-cols-[0.9fr_1.1fr]">
+          <div class="relative min-h-64 p-8 md:p-10">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="" class="absolute inset-0 h-full w-full object-cover opacity-40" />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-transparent"></div>
+            <div class="relative">
+              <p class="text-xs tracking-[0.3em] text-gold">COMMISSION</p>
+              <h2 class="mt-3 text-3xl font-bold">فرم سفارش طراحی سایت</h2>
+              <p class="mt-4 max-w-sm text-sm leading-7 text-mist">جزئیات برند، هدف و ددلاین را بنویسید. ظرف یک روز کاری با پیشنهاد مسیر طراحی برمی‌گردم.</p>
+            </div>
+          </div>
+          <form id="order-form" class="grid gap-4 p-6 md:p-10">
+            <p id="form-success" class="hidden rounded-2xl border border-sage/40 bg-sage/10 px-4 py-3 text-sm text-sage">درخواست ثبت شد. به‌زودی تماس می‌گیرم.</p>
+            <p id="form-error" class="hidden text-sm text-red-300"></p>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <label class="grid gap-2 text-sm">نام<input name="name" class="rounded-2xl border border-line bg-ink px-4 py-3 outline-none focus:border-gold/50" /></label>
+              <label class="grid gap-2 text-sm">ایمیل<input name="email" type="email" class="rounded-2xl border border-line bg-ink px-4 py-3 outline-none focus:border-gold/50" /></label>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <label class="grid gap-2 text-sm">تلفن<input name="phone" class="rounded-2xl border border-line bg-ink px-4 py-3 outline-none focus:border-gold/50" /></label>
+              <label class="grid gap-2 text-sm">نوع پروژه
+                <select name="type" class="rounded-2xl border border-line bg-ink px-4 py-3 outline-none focus:border-gold/50">
+                  <option>وردپرس</option>
+                  <option>رابط کاربری اختصاصی</option>
+                  <option>جاوااسکریپت / وب‌اپ</option>
+                  <option>سئو و بهینه‌سازی</option>
+                </select>
+              </label>
+            </div>
+            <label class="grid gap-2 text-sm">بودجه تقریبی<input name="budget" placeholder="مثلاً ۲۰ تا ۴۰ میلیون" class="rounded-2xl border border-line bg-ink px-4 py-3 outline-none focus:border-gold/50" /></label>
+            <label class="grid gap-2 text-sm">توضیح سفارش<textarea name="message" rows="4" class="resize-none rounded-2xl border border-line bg-ink px-4 py-3 outline-none focus:border-gold/50"></textarea></label>
+            <button type="submit" class="mt-2 rounded-full bg-gold px-6 py-3 text-sm font-medium text-void transition hover:bg-gold-soft">ارسال درخواست</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-line px-5 py-10">
+      <div class="mx-auto flex max-w-6xl flex-col gap-3 text-sm text-mist md:flex-row md:items-center md:justify-between">
+        <p>Peyman Namvar — طراحی وب و تجربه کاربری</p>
+        <p>پالت مینیمال · HTML · Tailwind · JavaScript</p>
+      </div>
+    </footer>
+
+    <div id="article-modal" class="fixed inset-0 z-[70] hidden" aria-hidden="true">
+      <button id="modal-backdrop" type="button" class="absolute inset-0 bg-void/70 backdrop-blur-sm" aria-label="بستن"></button>
+      <div class="relative mx-auto flex h-full max-w-3xl items-end justify-center md:items-center md:p-6">
+        <article class="relative max-h-[92vh] w-full overflow-y-auto rounded-t-[1.8rem] border border-line bg-ink md:rounded-[1.8rem]">
+          <img id="modal-image" src="" alt="" class="h-52 w-full object-cover md:h-72" />
+          <button id="modal-close" type="button" class="absolute left-4 top-4 rounded-full border border-white/20 bg-void/60 px-3 py-1 text-sm">بستن</button>
+          <div class="p-6 md:p-8">
+            <h3 id="modal-title" class="text-2xl font-bold md:text-3xl"></h3>
+            <p id="modal-body" class="mt-4 leading-8 text-mist"></p>
+            <div id="modal-gallery" class="mt-6 grid gap-3 sm:grid-cols-2"></div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
